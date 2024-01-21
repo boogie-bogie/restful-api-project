@@ -1,7 +1,11 @@
 import express from "express";
+import connect from "./schemas/index.js";
 
 const app = express();
 const PORT = 3000;
+
+//Mongoose Model 실행 함수
+connect();
 
 // body-parser 미들웨어 등록
 app.use(express.json());

@@ -25,6 +25,6 @@
   - ✔️ Express 서버 만들기 & 기본 서버 세팅
   - ✔️ 미들웨어 등록 (body-parser / Log / error-handler)
   - ✔️ /api GET 요청 TEST
-  - MongoDB 연결 -> Mongoose 스키마 설계&모델 생성 -> connect()
+  - ✔️ MongoDB 연결 -> Mongoose 스키마 설계&모델 생성 -> connect()
   - 라우터 미들웨어 등록
   - CRUD 구현 시작-
