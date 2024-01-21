@@ -1,5 +1,7 @@
 import express from "express";
 import connect from "./schemas/index.js";
+import ProductsRouter from "./routes/products.router.js";
+import errorHandlerMiddlewar from "./middlewares/error-handler.middleware.js";
 
 const app = express();
 const PORT = 3000;
@@ -25,10 +27,10 @@ router.get("/", (req, res) => {
 });
 
 // /api 주소로 접근시, 해당 라우터에 클라이언트 요청 전달
-app.use("/api", [router]);
+app.use("/api", [router, ProductsRouter]);
 
 //에러처리 미들웨어 등록
-// app.use(errorHandlerMiddlewar);
+app.use(errorHandlerMiddlewar);
 
 app.listen(PORT, () => {
   console.log(PORT, "번 포트로 서버가 열렸어요!");

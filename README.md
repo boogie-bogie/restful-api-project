@@ -25,6 +25,15 @@
   - ✔️ Express 서버 만들기 & 기본 서버 세팅
   - ✔️ 미들웨어 등록 (body-parser / Log / error-handler)
   - ✔️ /api GET 요청 TEST
-  - ✔️ MongoDB 연결 -> Mongoose 스키마 설계&모델 생성 -> connect()
-  - 라우터 미들웨어 등록
+  - ✔️ MongoDB 연결 -> connect()
+  - ✔️ Mongoose 스키마 설계&모델 생성
+  - ✔️ 라우터 미들웨어 등록
   - CRUD 구현 시작-
+    - ✔️ Create / 상품 등록 API 구현 및 TEST
+    - ✔️ Read / 상품 목록 전체 조회 및 상세 조회 API 구현 및 TEST
+    - 01.22 AM 02:12 Commit&push
+      - 내일 할일
+        - 에러 처리 및 Joi 연결 더 자연스럽게..
+        - Update API 구현 및 TEST
+        - 15시까지 최대한 리펙터링에 집중
+        - 이후 AWS EC2 배포와 도메인 연결 학습 및 적용
