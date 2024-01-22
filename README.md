@@ -12,8 +12,22 @@
   - ❌ (일부 충족 실패) Mongoose 공식 문서, Joi 공식 문서 보면서 코드 수정
     - 사유: PATCH 에서 비밀번호 불일치 구현하지 못함. DELETE에서도 일부 예외처리 미흡함.
   - 01.22 PM 21:00 Commit&push
-    - AWS EC2 배포와 도메인 연결 학습 및 적용
-    - 배포 후 PATCH/DELETE 수정 재개
+    ✔️ AWS EC2 배포와 도메인 연결 학습 및 적용
+    ✔️ 배포 후 PATCH/DELETE 수정 재개
+  - 01.22 PM 23:07
+    ✔️ AWS EC2 배포 및 도메인 bogiegie.shop:3000/api 연결 완료
+    ✔️ 리펙터링 재개
+  - 01.23 AM 04:08
+    ✔️ .env 환경변수 설정
+    ❌ (미흡) POST/GET/DELETE 리펙터링
+    - req.query와 req.body, req.params 차이 학습
+    - 중복되는 변수와 함수 분리/합성
+    - 중복되는 에러 처리 -> 핸들러 전달
+    - 내일 할일
+      - PATCH 수정
+      - 변수/함수 네이밍 수정
+      - README.md 정리
+      - Swagger API 명세 작성 후 연동
 
 ### 01.21 REST API 만들기 과제 시작
 

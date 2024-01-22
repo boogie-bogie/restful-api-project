@@ -1,14 +1,15 @@
 import express from "express";
 import connect from "./schemas/index.js";
 import ProductsRouter from "./routes/products.router.js";
-import errorHandlerMiddlewar from "./middlewares/error-handler.middleware.js";
+import errorHandlerMiddleware from "./middlewares/error-handler.middleware.js";
 import swaggerUI from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
+import "dotenv/config";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 4500;
 
-//Swagger api-docs
+// Swagger api-docs
 
 const options = {
   definition: {
@@ -20,7 +21,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: process.env.HOST_URL,
       },
     ],
   },
@@ -54,11 +55,11 @@ router.get("/", (req, res) => {
 app.use("/api", [router, ProductsRouter]);
 
 //에러처리 미들웨어 등록
-app.use(errorHandlerMiddlewar);
+app.use(errorHandlerMiddleware);
 
 app.listen(PORT, () => {
   console.log(
     PORT,
-    "번 포트로 서버가 열렸어요! http://localhost:3000/api-docs/",
+    "번 포트로 서버가 열렸어요! http://localhost:4500/api-docs/",
   );
 });

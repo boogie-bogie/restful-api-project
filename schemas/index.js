@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import "dotenv/config";
 
 const connect = () => {
   mongoose
     .connect(
-      "mongodb+srv://bogiegie:aa1023@express-mongo.eng6mjr.mongodb.net/?retryWrites=true&w=majority",
+      `mongodb+srv://bogiegie:${process.env.DB_PASS}@express-mongo.eng6mjr.mongodb.net/?retryWrites=true&w=majority`,
       {
         dbName: "node_lv1", // node_lv1 데이터베이스명을 사용합니다.
       },
