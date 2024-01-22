@@ -2,9 +2,33 @@ import express from "express";
 import connect from "./schemas/index.js";
 import ProductsRouter from "./routes/products.router.js";
 import errorHandlerMiddlewar from "./middlewares/error-handler.middleware.js";
+import swaggerUI from "swagger-ui-express";
+import swaggerJSDoc from "swagger-jsdoc";
 
 const app = express();
 const PORT = 3000;
+
+//Swagger api-docs
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "RESTful API Project",
+      version: "1.0.0",
+      description: "개인 과제",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const specs = swaggerJSDoc(options);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 //Mongoose Model 실행 함수
 connect();
@@ -33,5 +57,8 @@ app.use("/api", [router, ProductsRouter]);
 app.use(errorHandlerMiddlewar);
 
 app.listen(PORT, () => {
-  console.log(PORT, "번 포트로 서버가 열렸어요!");
+  console.log(
+    PORT,
+    "번 포트로 서버가 열렸어요! http://localhost:3000/api-docs/",
+  );
 });

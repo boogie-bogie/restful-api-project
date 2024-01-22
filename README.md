@@ -8,9 +8,12 @@
   - ✔️ Delete API 구현 및 TEST
   - ✔️ 15시까지 최대한 리펙터링에 집중
 - 계획 수정
-  - Swagger 연동부터 해보고
-  - Mongoose 공식 문서, Joi 공식 문서 보면서 코드 수정
-  - 이후 AWS EC2 배포와 도메인 연결 학습 및 적용
+  - ✔️ Swagger 연동부터 해보고 '/api-docs' 경로로 연결은 성공
+  - ❌ (일부 충족 실패) Mongoose 공식 문서, Joi 공식 문서 보면서 코드 수정
+    - 사유: PATCH 에서 비밀번호 불일치 구현하지 못함. DELETE에서도 일부 예외처리 미흡함.
+  - 01.22 PM 21:00 Commit&push
+    - AWS EC2 배포와 도메인 연결 학습 및 적용
+    - 배포 후 PATCH/DELETE 수정 재개
 
 ### 01.21 REST API 만들기 과제 시작
 
