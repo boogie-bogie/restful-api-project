@@ -13,20 +13,24 @@ const productsSchema = new mongoose.Schema({
   author: {
     type: String, // 판매자
     required: true, // 필수 항목
+    unique: true, // 작성자 중복 방지
   },
   password: {
     type: String, // 게시글 비밀번호
     required: true, // 필수 항목
   },
-  status: {
+  isSales: {
     type: String, // 판매 상태
-    required: false,
-    default: "FOR_SALE",
+    default: "FOR_SALE", // default
+    enum: {
+      values: ["FOR_SALE", "SOLD_OUT"], // 판매 상태는 2개만 존재
+      message: "{VALUE} is not supported",
+    },
   },
   date: {
-    type: Date,
+    type: Date, // 판매 상품 게시일
     default: Date.now,
-  }, // 판매 상품 게시일
+  },
 });
 
 export default mongoose.model("Products", productsSchema);

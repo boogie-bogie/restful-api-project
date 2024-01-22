@@ -16,4 +16,9 @@ mongoose.connection.on("error", (err) => {
   console.error("MongoDB 연결 에러", err);
 });
 
+mongoose.connection.on("disconnected", () => {
+  console.error("MongoDB 연결이 끊겼습니다. 연결을 재시도합니다.");
+  connect();
+});
+
 export default connect;

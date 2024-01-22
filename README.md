@@ -1,5 +1,17 @@
 ## RESTful API Project
 
+### 01.22 REST API
+
+- 오늘 할일
+  - ✔️ 에러 처리 및 Joi 연결 더 자연스럽게..
+  - ✔️ Update API 구현 및 TEST
+  - ✔️ Delete API 구현 및 TEST
+  - ✔️ 15시까지 최대한 리펙터링에 집중
+- 계획 수정
+  - Swagger 연동부터 해보고
+  - Mongoose 공식 문서, Joi 공식 문서 보면서 코드 수정
+  - 이후 AWS EC2 배포와 도메인 연결 학습 및 적용
+
 ### 01.21 REST API 만들기 과제 시작
 
 - 목표
@@ -11,7 +23,7 @@
     - AWS EC2 배포와 도메인 연결
   - 여유가 된다면, 해보면 좋을 것들
     - Swagger UI, API 명세 확인할 수 있게 연동해보기
-    - Mongoose ODM 배웠으니 Sequelize ORM도 해봐야겠지?
+    - ~~(무리) Mongoose ODM 배웠으니 Sequelize ORM도 해봐야겠지?~~
 
 - 오늘 할일
   - ✔️ Github Repository 생성 후 첫 커밋
@@ -35,5 +47,6 @@
       - 내일 할일
         - 에러 처리 및 Joi 연결 더 자연스럽게..
         - Update API 구현 및 TEST
+        - Delete API 구현 및 TEST
         - 15시까지 최대한 리펙터링에 집중
         - 이후 AWS EC2 배포와 도메인 연결 학습 및 적용
