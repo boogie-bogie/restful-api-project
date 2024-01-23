@@ -3,8 +3,9 @@
 ## 📌 프로젝트 개요
 ---
 
-[Domain] (http://bogiegie.shop:3000/api)
-[Github] (https://github.com/boogie-bogie)
+👉🏼 **[Domain]** http://bogiegie.shop:3000/api
+
+👉🏼 **[Github]** https://github.com/boogie-bogie
 
 + 과제 가이드에 기재된 API 명세서를 참고하여, RESTful한 원칙을 따르는 API를 구현해보려고 했습니다.
 + 웹 프레임워크/데이터베이스 : Node.js, Express.js, MongoDB, Mongoose ODM
