@@ -3,12 +3,9 @@ import "dotenv/config";
 
 const connect = () => {
   mongoose
-    .connect(
-      `mongodb+srv://bogiegie:${process.env.DB_PASS}@express-mongo.eng6mjr.mongodb.net/?retryWrites=true&w=majority`,
-      {
-        dbName: "node_lv1",
-      },
-    )
+    .connect(process.env.MONGODB_URI, {
+      dbName: process.env.MONGODB_DB_NAME,
+    })
     .then(() => console.log("MongoDB 연결에 성공하였습니다."))
     .catch((err) => console.log(`MongoDB 연결에 실패하였습니다. ${err}`));
 };

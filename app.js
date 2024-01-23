@@ -20,7 +20,7 @@ const options = {
     },
     servers: [
       {
-        url: process.env.HOST_URL,
+        url: "http://bogiegie.shop:3000/api-docs",
       },
     ],
   },
@@ -53,6 +53,6 @@ app.use(errorHandlerMiddleware);
 app.listen(PORT, () => {
   console.log(
     PORT,
-    "번 포트로 서버가 열렸어요! API 명세서: http://bogiegie.shop:3000/api",
+    "번 포트로 서버가 열렸어요! API 명세서: http://bogiegie.shop:3000/api-docs",
   );
 });

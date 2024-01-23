@@ -86,13 +86,7 @@ router
       const { productId } = req.params;
       const validation = await productsSchema.validateAsync(req.body);
       const { title, content, author, password, isSales } = validation;
-
-      const currentProduct = await Products.findOne({ _id: productId }).exec();
-      if (!currentProduct) {
-        return res
-          .status(404)
-          .json({ errorMessage: "상품 조회에 실패하였습니다." });
-      }
+      const currentProduct = await getProductById(productId);
 
       let message = { isSales: "", content: "" };
       if (isSales !== undefined) {
@@ -120,11 +114,11 @@ router
 
       if (password !== currentProduct.password) {
         return res.status(401).send({
-          message: "비밀번호 오류 : 상품을 수정할 수 없습니다.",
+          message: "상품을 수정할 권한이 존재하지 않습니다.",
         });
       }
 
-      return res.status(200).json({ message });
+      return res.status(200).json({ Message: "상품 정보가 변경되었습니다." });
     } catch (err) {
       console.error(err);
       return res.status(400).json({ errorMessage: err.message });
@@ -138,7 +132,7 @@ router
       const targetItem = await getProductById(productId);
 
       if (password !== targetItem?.password) {
-        throw new Error("비밀번호 오륲 : 상품을 삭제할 수 없습니다.");
+        throw new Error("비밀번호 오류 : 상품을 삭제할 수 없습니다.");
       }
       await Products.deleteOne({ _id: productId });
       return res.status(200).json({
