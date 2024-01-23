@@ -24,7 +24,7 @@ const productsSchema = new mongoose.Schema({
     enum: {
       values: ["FOR_SALE", "SOLD_OUT"],
       message:
-        "{VALUE} 상태는 등록할 수 없습니다. 판매 중(FOR_SALE)과 판매 완료(SOLD_OU) 상태만 설정 가능합니다.",
+        "{VALUE} 상태는 등록할 수 없습니다. 판매 중(FOR_SALE)과 판매 완료(SOLD_OUT) 상태만 설정 가능합니다.",
     },
   },
   date: {
