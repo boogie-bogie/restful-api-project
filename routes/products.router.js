@@ -1,11 +1,9 @@
 import express from "express";
-import mongoose from "mongoose";
 import Products from "../schemas/products.schema.js";
 import joi from "joi";
 
 const router = express.Router();
 
-// joi 스키마 정의
 const productsSchema = joi.object({
   title: joi.string().min(3).max(30).required(),
   content: joi.string().min(1).required(),
@@ -14,25 +12,17 @@ const productsSchema = joi.object({
   isSales: joi.string(),
 });
 
-/*
- * req.query와 req.body, req.params 차이
- * 중복되는 변수와 함수 합성
- * 중복되는 에러 처리 -> 핸들러로
- */
-
-// req.query
 const productSearch = async (query) => {
   const { title, author, isSales, date } = query;
-  const conditions = {};
+  const productList = {};
 
-  if (title) conditions.title = title;
-  if (author) conditions.author = author;
-  if (isSales) conditions.isSales = isSales;
+  if (title) productList.title = title;
+  if (author) productList.author = author;
+  if (isSales) productList.isSales = isSales;
 
-  return await Products.find(conditions).sort("-date").exec();
+  return await Products.find(productList).sort("-date").exec();
 };
 
-// req.body
 const productCreation = async (productData) => {
   const validation = await productsSchema.validateAsync(productData);
   const { title, content, author, password, isSales } = validation;
@@ -68,7 +58,6 @@ router
     }
   });
 
-// req.params
 const getProductById = async (productId) => {
   try {
     return await Products.findOne({ _id: productId }).exec();
@@ -80,7 +69,6 @@ const getProductById = async (productId) => {
 
 router
   .route("/products/:productId")
-  /* 상품 상세 조회 API */
   .get(async (req, res, next) => {
     try {
       const { productId } = req.params;
@@ -93,14 +81,12 @@ router
         .json({ errorMessage: "상품 조회에 실패하였습니다." });
     }
   })
-  /* 상품 정보 수정 API */
   .patch(async (req, res, next) => {
     try {
       const { productId } = req.params;
       const validation = await productsSchema.validateAsync(req.body);
       const { title, content, author, password, isSales } = validation;
 
-      /* 존재하지 않는 상품일 경우 */
       const currentProduct = await Products.findOne({ _id: productId }).exec();
       if (!currentProduct) {
         return res
@@ -108,20 +94,18 @@ router
           .json({ errorMessage: "상품 조회에 실패하였습니다." });
       }
 
-      /* 판매 상태 변경 */
       let message = { isSales: "", content: "" };
       if (isSales !== undefined) {
-        const targetProduct = await Products.findOne({ isSales }).exec();
-        if (targetProduct) {
-          targetProduct.isSales = currentProduct.isSales;
-          await targetProduct.save();
+        const targetStatus = await Products.findOne({ isSales }).exec();
+        if (targetStatus) {
+          targetStatus.isSales = currentProduct.isSales;
+          await targetStatus.save();
         }
         currentProduct.isSales = isSales;
         await currentProduct.save();
         message.isSales = "판매 상태가 변경되었습니다.";
       }
 
-      /* 게시글 변경 - 비밀번호 일치 여부 확인 */
       if (password === currentProduct.password) {
         const targetContent = await Products.findOne({ content }).exec();
         if (targetContent) {
@@ -133,10 +117,10 @@ router
         message.content =
           "비밀번호 확인 완료 : 작성한 글 내용이 변경되었습니다.";
       }
-      /* 비밀번호가 맞지 않으면? */
+
       if (password !== currentProduct.password) {
         return res.status(401).send({
-          message: "비밀번호 불일치 : 상품을 수정할 수 없습니다.",
+          message: "비밀번호 오류 : 상품을 수정할 수 없습니다.",
         });
       }
 
@@ -146,14 +130,15 @@ router
       return res.status(400).json({ errorMessage: err.message });
     }
   })
-  /* 상품 삭제 API */
+
   .delete(async (req, res, next) => {
     try {
       const { productId } = req.params;
       const { password } = req.body;
       const targetItem = await getProductById(productId);
+
       if (password !== targetItem?.password) {
-        throw new Error("비밀번호 불일치 : 상품을 삭제할 수 없습니다.");
+        throw new Error("비밀번호 오륲 : 상품을 삭제할 수 없습니다.");
       }
       await Products.deleteOne({ _id: productId });
       return res.status(200).json({

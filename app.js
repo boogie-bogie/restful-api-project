@@ -7,10 +7,9 @@ import swaggerJSDoc from "swagger-jsdoc";
 import "dotenv/config";
 
 const app = express();
-const PORT = process.env.PORT || 4500;
+const PORT = process.env.PORT;
 
 // Swagger api-docs
-
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -31,35 +30,29 @@ const options = {
 const specs = swaggerJSDoc(options);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
-//Mongoose Model 실행 함수
 connect();
 
-// body-parser 미들웨어 등록
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// 로그 미들웨어 등록
 app.use((req, res, next) => {
   console.log("Request URL:", req.originalUrl, " - ", new Date());
   next();
 });
 
-// 라우터 정의/등록
 const router = express.Router();
 
 router.get("/", (req, res) => {
   return res.json({ message: "안녕하세요.😄" });
 });
 
-// /api 주소로 접근시, 해당 라우터에 클라이언트 요청 전달
 app.use("/api", [router, ProductsRouter]);
 
-//에러처리 미들웨어 등록
 app.use(errorHandlerMiddleware);
 
 app.listen(PORT, () => {
   console.log(
     PORT,
-    "번 포트로 서버가 열렸어요! http://localhost:4500/api-docs/",
+    "번 포트로 서버가 열렸어요! API 명세서: http://bogiegie.shop:3000/api",
   );
 });

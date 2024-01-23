@@ -1,34 +1,34 @@
 import mongoose from "mongoose";
 
-// 상품(goods)에 대한 정보를 나타내는 스키마 정의
 const productsSchema = new mongoose.Schema({
   title: {
-    type: String, // 상품의 이름
-    required: true, // 필수 항목
+    type: String,
+    required: true,
   },
   content: {
-    type: String, // 판매 게시글 내용
-    required: true, // 필수 항목
+    type: String,
+    required: true,
   },
   author: {
-    type: String, // 판매자
-    required: true, // 필수 항목
-    unique: true, // 작성자 중복 방지
+    type: String,
+    required: true,
+    unique: true,
   },
   password: {
-    type: String, // 게시글 비밀번호
-    required: true, // 필수 항목
+    type: String,
+    required: true,
   },
   isSales: {
-    type: String, // 판매 상태
-    default: "FOR_SALE", // default
+    type: String,
+    default: "FOR_SALE",
     enum: {
-      values: ["FOR_SALE", "SOLD_OUT"], // 판매 상태는 2개만 존재
-      message: "{VALUE} is not supported",
+      values: ["FOR_SALE", "SOLD_OUT"],
+      message:
+        "{VALUE} 상태는 등록할 수 없습니다. 판매 중(FOR_SALE)과 판매 완료(SOLD_OU) 상태만 설정 가능합니다.",
     },
   },
   date: {
-    type: Date, // 판매 상품 게시일
+    type: Date,
     default: Date.now,
   },
 });
